@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Learn to Fly 2</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Play Learn to Fly 2 using Ruffle.">
+
+  <!-- Allow embedding in Canvas -->
+  <meta http-equiv="X-Frame-Options" content="ALLOWALL">
+  <meta http-equiv="Content-Security-Policy" content="frame-ancestors *">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #111;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    .header {
+      padding: 12px 20px;
+      background: #000;
+      color: #fff;
+      font-size: 20px;
+      font-weight: bold;
+      border-bottom: 2px solid #444;
+    }
+
+    #ruffle-container {
+      width: 100%;
+      height: calc(100% - 50px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #player {
+      width: 90vw;
+      height: 90vh;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">Learn to Fly 2 — Press F for Fullscreen</div>
+
+  <div id="ruffle-container">
+    <div id="ruffle"></div>
+  </div>
+
+  <script src="ruffle.js"></script>
+
+  <script>
+    window.RufflePlayer = window.RufflePlayer || {};
+
+    window.addEventListener("load", () => {
+      const ruffle = window.RufflePlayer.newest();
+      const player = ruffle.createPlayer();
+
+      player.id = "player";
+
+      document.getElementById("ruffle").appendChild(player);
+
+      // Load your SWF file
+      player.load("learn-to-fly-2-11967.swf");
+    });
+
+    // Fullscreen toggle
+    function toggleFullscreen() {
+      const elem = document.documentElement;
+
+      if (!document.fullscreenElement) {
+        if (elem.requestFullscreen) elem.requestFullscreen();
+        else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+        else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        else if (document.msExitFullscreen) document.msExitFullscreen();
+      }
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key.toLowerCase() === "f") {
+        toggleFullscreen();
+      }
+    });
+  </script>
+
+</body>
+</html>
